@@ -1,4 +1,5 @@
 # Estoque
+<<<<<<< HEAD
 
 Esta api, serve para armazenar itens num banco de dados e poderem ser consumidos.
 Este código está sendo usado por uma pequena loja de bebidas a qual quer saber o quanto de itens tem em estoque e os lucros obtidos pela venta destes.
@@ -15,3 +16,6 @@ Obs: Deve-se ter instalado o `node` na maquina junto do `npm` (este gerenciador 
 ## Testando antes de rodar
 
 Para saber se a api vai se comportar corretamente foram desenvolvidos alguns testes. Para rodar estes testes basta digitar `npm run test` no terminal.
+=======
+Sistema de vendas. 
+>>>>>>> 9ec166d (Initial commit)
