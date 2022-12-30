@@ -1,0 +1,2 @@
+//URL da conexão com o banco de dados MongoDB.
+URL_DB="mongodb://dariel:*Leirad123@127.0.0.1:27017/estoque"
