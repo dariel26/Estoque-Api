@@ -15,7 +15,7 @@ module.exports = {
                 res.status(statusHttp.badRequest.status).json({ errorValidation: true, message: "Campo deve ser preenchido" });
             } else {
                 console.log(error);
-                res.status(statusHttp.internalServerError.code).json();
+                res.status(statusHttp.internalServerError.status).json();
             }
         }
     },
@@ -28,7 +28,7 @@ module.exports = {
             res.status(statusHttp.ok.status).json();
         } catch (error) {
             console.log(error);
-            res.status(statusHttp.internalServerError.code).json();
+            res.status(statusHttp.internalServerError.status).json();
         }
     },
 
@@ -39,7 +39,7 @@ module.exports = {
             res.status(statusHttp.ok.status).json();
         } catch (error) {
             console.log(error);
-            res.status(statusHttp.internalServerError.code).json();
+            res.status(statusHttp.internalServerError.status).json();
         }
     },
 
@@ -55,7 +55,7 @@ module.exports = {
             }
         } catch (error) {
             console.log(error);
-            res.status(statusHttp.internalServerError.code).json();
+            res.status(statusHttp.internalServerError.status).json();
         }
     },
 }
