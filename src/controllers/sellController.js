@@ -11,6 +11,8 @@ module.exports = {
         } catch (error) {
             if (error.code === 11000) {
                 res.status(statusHttp.badRequest.status).json({ errorCode: true, message: "Id existente" });
+            } else if (error._message === "Sell validation failed") {
+                res.status(statusHttp.badRequest.status).json({ errorCode: true, message: "Campo deve ser preenchido" });
             } else {
                 console.log(error);
                 res.status(statusHttp.internalServerError.status).json();

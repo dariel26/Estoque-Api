@@ -10,9 +10,9 @@ const idItem = mongoose.Types.ObjectId(1);
 const idUser = mongoose.Types.ObjectId(2);
 const idSell = mongoose.Types.ObjectId(3);
 
-const itemParams = { _id: idItem, name: "agua", code: "1", amount: 2, price: 2 };
+const itemParams = { _id: idItem, name: "agua", code: "1", amount: 2, priceBuy: 2, priceSell: 4 };
 const userParams = { _id: idUser, name: "teste", email: "teste@teste.tes", password: "123" };
-const sellParams = { _id: idSell, namesItems: ["agua"], codesItems: ["123"], nameUser: "teste", emailUser: "teste" };
+const sellParams = { _id: idSell, items: [{ code: "123", name: "agua", price: 3.2 }], emailUser: "123" };
 
 
 describe(`Api ${apiVersion} - Post Routes`, () => {
