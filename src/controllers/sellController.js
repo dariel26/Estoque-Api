@@ -9,8 +9,12 @@ module.exports = {
             await newSell.save();
             res.status(statusHttp.ok.status).json();
         } catch (error) {
-            console.log(error);
-            res.status(statusHttp.internalServerError.status).json();
+            if (error.code === 11000) {
+                res.status(statusHttp.badRequest.status).json({ errorCode: true, message: "Id existente" });
+            } else {
+                console.log(error);
+                res.status(statusHttp.internalServerError.status).json();
+            }
         }
     },
 
@@ -18,8 +22,12 @@ module.exports = {
         const { id } = req.query;
         const sellParams = req.body;
         try {
-            await Sell.updateOne({ _id: id }, [{ $set: sellParams }]);
-            res.status(statusHttp.ok.status).json();
+            if (await Sell.findOne({ _id: id })) {
+                await Sell.updateOne({ _id: id }, [{ $set: sellParams }]);
+                res.status(statusHttp.ok.status).json();
+            } else {
+                res.status(statusHttp.notFound.status).json();
+            }
         } catch (error) {
             console.log(error);
             res.status(statusHttp.internalServerError.status).json();
@@ -29,8 +37,13 @@ module.exports = {
     deleteSell: async (req, res) => {
         const { id } = req.query;
         try {
-            await Sell.deleteOne({ _id: id });
-            res.status(statusHttp.ok.status).json();
+            if (await Sell.findOne({ _id: id })) {
+                await Sell.deleteOne({ _id: id });
+                res.status(statusHttp.ok.status).json();
+            } else {
+                res.status(statusHttp.notFound.status).json();
+            }
+
         } catch (error) {
             console.log(error);
             res.status(statusHttp.internalServerError.status).json();
@@ -41,11 +54,15 @@ module.exports = {
         const { id } = req.query;
         try {
             if (id === undefined) {
-                const users = await Sell.find();
-                res.json(users);
+                const sells = await Sell.find();
+                res.json(sells);
             } else {
-                const user = await Sell.findOne({ _id: id });
-                res.json(user);
+                const sell = await Sell.findOne({ _id: id });
+                if (sell) {
+                    res.json(sell);
+                } else {
+                    res.status(statusHttp.notFound.status).json();
+                }
             }
         } catch (error) {
             console.log(error);

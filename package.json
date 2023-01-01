@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node bin/www.js",
     "dev": "nodemon bin/www.js",
-    "test": "jest"
+    "test": "jest --verbose --coverage"
   },
   "author": "Dariel Arian Acosta Campos",
   "license": "ISC",

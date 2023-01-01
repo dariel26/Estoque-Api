@@ -2,7 +2,7 @@
 require("dotenv").config();
 
 describe("index.js", () => {
-    it("Variaiveis de ambiente", () => {
+    test("Environment Variables", () => {
         return expect(process.env.URL_DB).toBeDefined();
     })
 });

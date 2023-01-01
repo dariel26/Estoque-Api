@@ -29,8 +29,12 @@ module.exports = {
         const { id } = req.query;
         const userParams = req.body;
         try {
-            await User.updateOne({ _id: id }, [{ $set: userParams }]);
-            res.status(statusHttp.ok.status).json();
+            if(await User.findOne({ _id: id })){
+                await User.updateOne({ _id: id }, [{ $set: userParams }]);
+                res.status(statusHttp.ok.status).json();
+            }else{
+                res.status(statusHttp.notFound.status).json();
+            }
         } catch (error) {
             console.log(error);
             res.status(statusHttp.internalServerError.status).json();
@@ -40,8 +44,12 @@ module.exports = {
     deleteUser: async (req, res) => {
         const { id } = req.query;
         try {
-            await User.deleteOne({ _id: id });
-            res.status(statusHttp.ok.status).json();
+            if (await User.findOne({ _id: id })) {
+                await User.deleteOne({ _id: id });
+                res.status(statusHttp.ok.status).json();
+            } else {
+                res.status(statusHttp.notFound.status).json();
+            }
         } catch (error) {
             console.log(error);
             res.status(statusHttp.internalServerError.status).json();
@@ -56,7 +64,11 @@ module.exports = {
                 res.json(users);
             } else {
                 const user = await User.findOne({ _id: id });
-                res.json(user);
+                if (user) {
+                    res.json(user);
+                } else {
+                    res.status(statusHttp.notFound.status).json();
+                }
             }
         } catch (error) {
             console.log(error);

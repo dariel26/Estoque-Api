@@ -24,8 +24,12 @@ module.exports = {
         const { id } = req.query;
         const itemsParams = req.body;
         try {
-            await Item.updateOne({ _id: id }, [{ $set: itemsParams }]);
-            res.status(statusHttp.ok.status).json();
+            if (await Item.findOne({ _id: id })) {
+                await Item.updateOne({ _id: id }, [{ $set: itemsParams }]);
+                res.status(statusHttp.ok.status).json();
+            } else {
+                res.status(statusHttp.notFound.status).json();
+            }
         } catch (error) {
             console.log(error);
             res.status(statusHttp.internalServerError.status).json();
@@ -35,8 +39,13 @@ module.exports = {
     deleteItem: async (req, res) => {
         const { id } = req.query;
         try {
-            await Item.deleteOne({ _id: id });
-            res.status(statusHttp.ok.status).json();
+            if (await Item.findOne({ _id: id })) {
+                await Item.deleteOne({ _id: id });
+                res.status(statusHttp.ok.status).json();
+            } else {
+                res.status(statusHttp.notFound.status).json();
+            }
+
         } catch (error) {
             console.log(error);
             res.status(statusHttp.internalServerError.status).json();
@@ -51,7 +60,11 @@ module.exports = {
                 res.json(items);
             } else {
                 const item = await Item.findOne({ _id: id });
-                res.json(item);
+                if (item) {
+                    res.json(item);
+                } else {
+                    res.status(statusHttp.notFound.status).json();
+                }
             }
         } catch (error) {
             console.log(error);

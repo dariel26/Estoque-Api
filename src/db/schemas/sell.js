@@ -1,7 +1,7 @@
 const mongoose = require("../db");
 
 const sellSchema = new mongoose.Schema({
-    namesItem: { type: Array, required: true },
+    namesItems: { type: Array, required: true },
     codesItems: { type: Array, required: true },
     sellAt: { type: Date, default: new Date() },
     nameUser: { type: String, required: true },
