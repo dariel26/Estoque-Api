@@ -8,4 +8,7 @@ describe("Environment Variables", () => {
     test("Running Port", () => {
         return expect(process.env.PORT).toBeDefined();
     });
+    test("JWT key", () => {
+        return expect(process.env.JWT_KEY).toBeDefined();
+    });
 });

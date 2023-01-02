@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const api = require("./router/api");
+const access = require("./router/access");
 
 const app = express();
 
@@ -12,5 +13,8 @@ app.use(cors());
 
 //Routas da Api
 app.use("/api", api);
+
+//Routas de acesso
+app.use("/access", access);
 
 module.exports = app;

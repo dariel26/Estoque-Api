@@ -1,5 +1,8 @@
 //Running Port
-PORT="5000"
+PORT = "5000"
 
 //URL for connection with the Data Base.
-URL_DB="mongodb://user:password@127.0.0.1:27017/database"
+URL_DB = "mongodb://user:password@127.0.0.1:27017/database"
+
+//Jsonwebtoken Key
+JWT_KEY = "anything"
