@@ -1,6 +1,7 @@
 const cipher = require("../cipher/cipher");
 const User = require("../db/schemas/user");
 const { confirmEmail } = require("../nodemailer/nodemailer");
+const { createToken } = require("../services/access");
 const statusHttp = require("../statusHttp");
 
 module.exports = {
@@ -14,8 +15,10 @@ module.exports = {
         userParams.password = await cipher.cipher(userParams.password);
         let newUser = new User(userParams);
         try {
-            await newUser.save();
-            confirmEmail(userParams.email, link)
+            const user = await newUser.save();
+            const token = createToken({ id: user._id });
+            console.log(user._id);
+            confirmEmail(userParams.email, link + "?token=" + token)
                 .then(() => {
                     res.status(statusHttp.ok.status).json();
                 })
