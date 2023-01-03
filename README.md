@@ -1,7 +1,7 @@
 # Estoque
 
 Esta api, serve para armazenar itens num banco de dados e poderem ser consumidos.
-Este código está sendo por uma pequena loja de bebidas a qual quer saber o quanto de itens tem em estoque e os lucros obtidos pela venta destes.
+Este código está sendo usado por uma pequena loja de bebidas a qual quer saber o quanto de itens tem em estoque e os lucros obtidos pela venta destes.
 
 ## Para rodar localmente
 

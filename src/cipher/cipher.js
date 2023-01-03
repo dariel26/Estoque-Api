@@ -18,7 +18,6 @@ module.exports = {
     compare : async (password, hash) => {
         return new Promise(async (resolve) => {
             bcrypt.compare(password, hash, (err, result) => {
-                console.log(password, hash);
                 if(err){
                     resolve(false);
                 }else{

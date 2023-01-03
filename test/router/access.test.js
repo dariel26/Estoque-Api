@@ -11,7 +11,7 @@ const idUser = mongoose.Types.ObjectId(4);
 const email = "teste2@teste.tes";
 const password = "1234";
 const similarPass = "123";
-const userParams = { _id: idUser, name: "teste2", email: email, password: password };
+const userParams = { _id: idUser, name: "teste2", email: email, password: password, active: true, link: "https://google.com" };
 const token = createToken({ id: "1" });
 
 describe(`Api ${apiVersion} - User`, () => {

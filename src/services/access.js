@@ -17,7 +17,7 @@ function createToken(data) {
 module.exports = {
 
     createToken,
-    
+
     login: async (req, res) => {
         try {
             const { login, password } = req.body;
@@ -25,7 +25,7 @@ module.exports = {
                 return res.status(statusHttp.badRequest.status).json();
             }
             const user = await User.findOne({ email: login });
-            if (user) {
+            if (user &&  user.active) {
                 const hashPassword = user.password;
                 const userID = user._id;
                 const name = user.name;

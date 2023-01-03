@@ -1,18 +1,27 @@
 const cipher = require("../cipher/cipher");
 const User = require("../db/schemas/user");
+const { confirmEmail } = require("../nodemailer/nodemailer");
 const statusHttp = require("../statusHttp");
 
 module.exports = {
     addUser: async (req, res) => {
         const userParams = req.body;
-        if (userParams.password === undefined) {
+        const { link } = req.body;
+
+        if (userParams.password === undefined || link === undefined) {
             res.status(statusHttp.badRequest.status).json({ errorValidation: true, message: "Campo deve ser preenchido" });
         }
         userParams.password = await cipher.cipher(userParams.password);
         let newUser = new User(userParams);
         try {
             await newUser.save();
-            res.status(statusHttp.ok.status).json();
+            confirmEmail(userParams.email, link)
+                .then(() => {
+                    res.status(statusHttp.ok.status).json();
+                })
+                .catch((err) => {
+                    res.status(statusHttp.internalServerError.status).json();
+                })
         } catch (error) {
             if (error.code === 11000) {
                 res.status(statusHttp.badRequest.status).json({ errorEmail: true, message: "Email existente" });
@@ -29,10 +38,10 @@ module.exports = {
         const { id } = req.query;
         const userParams = req.body;
         try {
-            if(await User.findOne({ _id: id })){
+            if (await User.findOne({ _id: id })) {
                 await User.updateOne({ _id: id }, [{ $set: userParams }]);
                 res.status(statusHttp.ok.status).json();
-            }else{
+            } else {
                 res.status(statusHttp.notFound.status).json();
             }
         } catch (error) {

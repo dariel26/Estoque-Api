@@ -11,4 +11,10 @@ describe("Environment Variables", () => {
     test("JWT key", () => {
         return expect(process.env.JWT_KEY).toBeDefined();
     });
+    test("Email user", () => {
+        return expect(process.env.EMAIL_USER).toBeDefined();
+    });
+    test("Email pass", () => {
+        return expect(process.env.EMAIL_PASS).toBeDefined();
+    });
 });

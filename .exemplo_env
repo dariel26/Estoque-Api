@@ -6,3 +6,7 @@ URL_DB = "mongodb://user:password@127.0.0.1:27017/database"
 
 //Jsonwebtoken Key
 JWT_KEY = "anything"
+
+//Email account
+EMAIL_USER='email@gmail.com'
+EMAIL_PASS='password_application (this field is funded in configurations at the gmail account)'
