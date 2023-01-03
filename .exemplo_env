@@ -1,12 +1,12 @@
-//Running Port
+#Running Port
 PORT = "5000"
 
-//URL for connection with the Data Base.
+#URL for connection with the Data Base.
 URL_DB = "mongodb://user:password@127.0.0.1:27017/database"
 
-//Jsonwebtoken Key
+#Jsonwebtoken Key
 JWT_KEY = "anything"
 
-//Email account
+#Email account
 EMAIL_USER='email@gmail.com'
 EMAIL_PASS='password_application (this field is funded in configurations at the gmail account)'

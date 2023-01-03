@@ -2,13 +2,13 @@
   "name": "estoque_back",
   "version": "2.0.0",
   "description": "Sistema de estoque",
-  "main": "www.js",
+  "main": "index.js",
   "engines": {
     "node": "16.x"
   },
   "scripts": {
-    "start": "node bin/www.js",
-    "dev": "nodemon bin/www.js",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "test": "jest --verbose --coverage"
   },
   "author": "Dariel Arian Acosta Campos",
