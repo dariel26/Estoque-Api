@@ -34,7 +34,7 @@ module.exports = {
                 path: __dirname + '/images/amorim-removebg-preview.png',
                 cid: 'logo@cid',
             }];
-            return await sendEmail(email, "Email de confirmação", attachments, htmlToSend);
+            return await sendEmail(email, "E-mail de Confirmação", attachments, htmlToSend);
         });
     }
 };
