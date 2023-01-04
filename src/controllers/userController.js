@@ -8,13 +8,12 @@ module.exports = {
     addUser: async (req, res) => {
         const userParams = req.body;
         const { link } = req.body;
-
         if (userParams.password === undefined || link === undefined) {
             res.status(statusHttp.badRequest.status).json({ errorValidation: true, message: "Campo deve ser preenchido" });
         }
-        userParams.password = await cipher.cipher(userParams.password);
-        let newUser = new User(userParams);
         try {
+            userParams.password = await cipher.cipher(userParams.password);
+            let newUser = new User(userParams);
             const user = await newUser.save();
             const token = createToken({ id: user._id });
             console.log(user._id);
